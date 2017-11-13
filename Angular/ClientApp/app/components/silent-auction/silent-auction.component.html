@@ -1,0 +1,26 @@
+﻿<div class="silent-auction-component">
+    <div class="new-item-form">
+        <form #silentItemForm="ngForm" (ngSubmit)="addNewItem()">
+            <div class="form-group">
+                <label for="number">Number</label>
+                <input type="text" class="form-control" id="number" required
+                       [(ngModel)]="newItemModel.number" name="number">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" required
+                       [(ngModel)]="newItemModel.description" name="description">
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+    <div class="silent-item-grid">
+        <div class="header">
+            <div class="number-column">Item Number</div>
+            <div class="description-column">Item Description</div>
+        </div>
+        <div class="silent-item-component" *ngFor="let item of items">
+            <silent-item [item]="item"></silent-item>
+        </div>
+    </div>
+</div>

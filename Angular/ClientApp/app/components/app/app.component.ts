@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { ExampleService } from "../../services/example.service";
+import { AuctionService } from "../../services/auction.service";
+import './app.component.less';
 
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    providers: [ExampleService]
+    providers: [AuctionService]
 })
 export class AppComponent {
-    //constructor(private exampleService: ExampleService) { }
 }
