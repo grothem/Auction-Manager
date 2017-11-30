@@ -73,6 +73,33 @@ namespace Angular.Controllers
 
             return Json(null);
         }
+
+        [HttpPost("[action]")]
+        public async Task<JsonResult> DeleteItem([FromBody]Item item)
+        {
+            _repository.DeleteItem(item.ID);
+            await _repository.SaveChangesAsync();
+ 
+            return Json(null);
+        }
+
+        [HttpPost("[action]")]
+        public async Task<JsonResult> EditItem([FromBody] Item item)
+        {
+            var itemDb = _repository.GetItem(item.ID);
+            if (itemDb != null)
+            {
+                _repository.EditItem(itemDb);
+                itemDb.Number = item.Number;
+                itemDb.Description = item.Description;
+                if (await _repository.SaveChangesAsync())
+                {
+                    return Json(itemDb);
+                }
+
+            }
+            return Json("error");
+        }
     }
 
     public class NewItem

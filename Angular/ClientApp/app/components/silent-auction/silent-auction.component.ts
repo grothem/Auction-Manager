@@ -10,7 +10,7 @@ import { AuctionService, Item, NewItem } from '../../services/auction.service';
 export class SilentAuctionComponent {
     items: Item[] = [];
     newItemModel: NewItem = { number: "", description: "" };
-    
+
     constructor(http: Http, @Inject('BASE_URL') baseUrl: string, private auctionService: AuctionService) {
         this.auctionService.getSilentItmes().then(response => {
             this.items = response;
@@ -24,5 +24,22 @@ export class SilentAuctionComponent {
                 this.newItemModel.description = "";
                 this.newItemModel.number = "";
             });
+    }
+
+    deleteItem(item: Item) {
+        this.auctionService.deleteItem(item).then(() => {
+            var index = this.items.indexOf(item);
+            if (index > -1)
+                this.items.splice(index, 1);
+        });
+    }
+
+    saveItem(item: Item) {
+        var index = this.items.findIndex((i) => { return i.id === item.id });
+        this.auctionService.saveItem(item).then((i) => {
+            // var index = this.items.indexOf(item);
+            if (index > -1)
+                this.items[index] = i;
+        });
     }
 }

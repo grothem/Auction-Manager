@@ -11,7 +11,10 @@ namespace Angular.Context
         IEnumerable<Item> GetAllItems();
         IEnumerable<Item> GetSilentItems();
         IEnumerable<Item> GetLiveItems();
+        Item GetItem(int id);
         void AddNewItem(Item newItem);
+        void DeleteItem(int id);
+        void EditItem(Item item);
         Task<bool> SaveChangesAsync();
     }
 }

@@ -2,6 +2,7 @@
 import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
+import { Response } from '@angular/http/src/static_response';
 
 @Injectable()
 export class AuctionService {
@@ -33,6 +34,20 @@ export class AuctionService {
         return this.http.post('api/Item/AddSilentItem', item)
             .toPromise()
             .then(response => response.json() as Item)
+            .catch(this.handleError);
+    }
+
+    deleteItem(item: Item): Promise<Item> {
+        return this.http.post('api/Item/DeleteItem', item)
+            .toPromise()
+            .then(response => response.json())
+            .catch()
+    }
+
+    saveItem(item: Item): Promise<Item> {
+        return this.http.post('api/Item/EditItem', item)
+            .toPromise()
+            .then(response => response.json())
             .catch()
     }
 

@@ -20,7 +20,7 @@
             <div class="description-column">Item Description</div>
         </div>
         <div class="silent-item-component" *ngFor="let item of items">
-            <silent-item [item]="item"></silent-item>
+            <silent-item [item]="item" (deleteItem)="deleteItem($event)" (saveItem)="saveItem($event)"></silent-item>
         </div>
     </div>
 </div>

@@ -1,4 +1,17 @@
 <div class="item-container">
-    <div class="item-number">{{ item.number }}</div>
-    <div class="item-description">{{ item.description }}</div>
+    <div *ngIf="!editing; else editBlock">
+        <div class="item-row">
+            <div class="item-number">{{ item.number }}</div>
+            <div class="item-description">{{ item.description }}</div>
+            <div class="item-edit" (click)="edit()">Edit</div>
+        </div>
+    </div>
+    <div class="item-delete" (click)="delete()">Delete</div>
 </div>
+
+<ng-template #editBlock>
+    <input type="text" class="form-control" [(ngModel)]="itemCopy.number" name="number">
+    <input type="text" class="form-control" [(ngModel)]="itemCopy.description" name="description">
+    <div class="item-edit" (click)="cancel()">Cancel</div>
+    <div class="item-save" (click)="save()">Save</div>
+</ng-template>
